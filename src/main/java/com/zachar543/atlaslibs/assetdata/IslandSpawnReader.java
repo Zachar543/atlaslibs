@@ -1,9 +1,9 @@
-package com.zachar543.atlas.atlaslibs;
+package com.zachar543.atlaslibs.assetdata;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zachar543.atlas.atlaslibs.umap.IslandSpawns;
-import com.zachar543.atlas.atlaslibs.umap.UMapReader;
+import com.zachar543.atlaslibs.assetdata.umap.IslandSpawnsDO;
+import com.zachar543.atlaslibs.assetdata.umap.UMapReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,13 +13,13 @@ import java.util.Map;
 public class IslandSpawnReader {
 	private UMapReader uMapReader = new UMapReader();
 	
-	public Map<String, IslandSpawns> readIslandSpawns(File baseDir) throws Exception {
-		Map<String, IslandSpawns> result = new HashMap<>();
+	public Map<String, IslandSpawnsDO> readIslandSpawns(File baseDir) throws Exception {
+		Map<String, IslandSpawnsDO> result = new HashMap<>();
 
-		HashMap<String, IslandData> islandData = loadIslandData();
-		for (Map.Entry<String, IslandData> islandDataEntry : islandData.entrySet()) {
+		HashMap<String, IslandDataDO> islandData = loadIslandData();
+		for (Map.Entry<String, IslandDataDO> islandDataEntry : islandData.entrySet()) {
 			String islandName = islandDataEntry.getKey();
-			IslandData island = islandDataEntry.getValue();
+			IslandDataDO island = islandDataEntry.getValue();
 			
 			result.put(islandName, processIsland(baseDir, islandName, island));
 		}
@@ -27,10 +27,10 @@ public class IslandSpawnReader {
 		return result;
 	}
 	
-	private IslandSpawns processIsland(File baseDir, String islandName, IslandData island) throws IOException {
+	private IslandSpawnsDO processIsland(File baseDir, String islandName, IslandDataDO island) throws IOException {
 		System.out.println(" - Processing Island \"" + islandName + "\"...");
 		
-		IslandSpawns result = new IslandSpawns();
+		IslandSpawnsDO result = new IslandSpawnsDO();
 		for (String subLevelName : island.getSublevelNames()) {
 			System.out.println("   - Processing subLevel \"" + subLevelName + "\"...");
 			File subLevelFolder = new File(baseDir, findSubLevelFolder(subLevelName));
@@ -41,9 +41,9 @@ public class IslandSpawnReader {
 		return result;
 	}
 	
-	private HashMap<String, IslandData> loadIslandData() throws IOException {
+	private HashMap<String, IslandDataDO> loadIslandData() throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		TypeReference<HashMap<String, IslandData>> typeRef = new TypeReference<HashMap<String, IslandData>>() {};
+		TypeReference<HashMap<String, IslandDataDO>> typeRef = new TypeReference<HashMap<String, IslandDataDO>>() {};
 		System.out.println(" - Loading islands.json...");
 		
 		return mapper.readValue(new File("src/main/resources/islands.json"), typeRef);

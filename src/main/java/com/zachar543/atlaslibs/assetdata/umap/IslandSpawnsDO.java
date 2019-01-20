@@ -1,4 +1,4 @@
-package com.zachar543.atlas.atlaslibs.umap;
+package com.zachar543.atlaslibs.assetdata.umap;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -11,13 +11,13 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IslandSpawns {
+public class IslandSpawnsDO {
 	
-	Set<Creature> creatures = new LinkedHashSet<>();
-	Set<Resource> resources = new LinkedHashSet<>();
+	Set<CreatureDO> creatures = new LinkedHashSet<>();
+	Set<ResourceDO> resources = new LinkedHashSet<>();
 	
 	@JsonIgnore
-	public IslandSpawns addAllFrom(IslandSpawns islandSpawns) {
+	public IslandSpawnsDO addAllFrom(IslandSpawnsDO islandSpawns) {
 		creatures.addAll(islandSpawns.getCreatures());
 		resources.addAll(islandSpawns.getResources());
 		

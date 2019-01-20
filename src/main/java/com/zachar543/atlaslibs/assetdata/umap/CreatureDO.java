@@ -1,4 +1,4 @@
-package com.zachar543.atlas.atlaslibs.umap;
+package com.zachar543.atlaslibs.assetdata.umap;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Resource {
-
-	private String type;
-	private String variant;
-
+public class CreatureDO {
+	
+	private String name;
+	
 }

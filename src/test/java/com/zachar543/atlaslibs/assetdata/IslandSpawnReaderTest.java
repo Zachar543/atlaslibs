@@ -1,7 +1,7 @@
-package com.zachar543.atlas.atlaslibs;
+package com.zachar543.atlaslibs.assetdata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zachar543.atlas.atlaslibs.umap.IslandSpawns;
+import com.zachar543.atlaslibs.assetdata.umap.IslandSpawnsDO;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -14,9 +14,10 @@ public class IslandSpawnReaderTest {
 	
 	@Test
 	public void readAll() throws Exception {
-		File baseDir = new File("F:/_Games/steamapps/common/ATLAS/ShooterGame/Content/Maps/SeamlessTest");
+		String path = "F:/_Games/steamapps/common/ATLAS/ShooterGame/Content/Maps/SeamlessTest";
+		File baseDir = new File(path);
 		
-		Map<String, IslandSpawns> result = new IslandSpawnReader().readIslandSpawns(baseDir);
+		Map<String, IslandSpawnsDO> result = new IslandSpawnReader().readIslandSpawns(baseDir);
 		FileUtils.writeStringToFile(Paths.get("output", "output.json").toFile(), new ObjectMapper().writeValueAsString(result), StandardCharsets.UTF_8, false);
 	}
 	

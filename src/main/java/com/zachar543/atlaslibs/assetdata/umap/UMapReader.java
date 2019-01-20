@@ -1,4 +1,4 @@
-package com.zachar543.atlas.atlaslibs.umap;
+package com.zachar543.atlaslibs.assetdata.umap;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -17,25 +17,25 @@ public class UMapReader {
 	private Pattern materialPattern = Pattern.compile("^/Game/Atlas/AtlasCoreBP/HarvestComponents/.+/(?<type>.+)HarvestComponent_(?<variant>.+)$");
 	private Pattern creaturePattern = Pattern.compile("^/Game/Atlas/Creatures/.+/(?<name>.+)_Character_BP$");
 	
-	public IslandSpawns readMaterialsFromUMapFile(File file) throws IOException {
+	public IslandSpawnsDO readMaterialsFromUMapFile(File file) throws IOException {
 		ByteBuffer buffer = ByteBuffer.wrap(Files.readAllBytes(file.toPath())).order(ByteOrder.LITTLE_ENDIAN);
 		
 		readHeader(buffer);
 		List<String> components = readComponents(buffer);
 		
-		Set<Resource> resources = components.stream()
+		Set<ResourceDO> resources = components.stream()
 				.map(str -> materialPattern.matcher(str))
 				.filter(Matcher::matches)
-				.map(m -> new Resource(m.group("type"), m.group("variant")))
+				.map(m -> new ResourceDO(m.group("type"), m.group("variant")))
 				.collect(Collectors.toSet());
 		
-		Set<Creature> creatures = components.stream()
+		Set<CreatureDO> creatures = components.stream()
 				.map(str -> creaturePattern.matcher(str))
 				.filter(Matcher::matches)
-				.map(m -> new Creature(m.group("name")))
+				.map(m -> new CreatureDO(m.group("name")))
 				.collect(Collectors.toSet());
 		
-		return new IslandSpawns(creatures, resources);
+		return new IslandSpawnsDO(creatures, resources);
 	}
 	
 	private void readHeader(ByteBuffer buffer) {

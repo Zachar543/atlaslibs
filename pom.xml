@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zachar543.atlas</groupId>
+    <groupId>com.zachar543</groupId>
     <artifactId>atlas-libs</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -17,6 +17,7 @@
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-io.version>2.6</commons-io.version>
         <lombok.version>1.16.22</lombok.version>
+        <jedis.version>3.0.1</jedis.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -32,6 +33,12 @@
     </scm>
 
     <dependencies>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
