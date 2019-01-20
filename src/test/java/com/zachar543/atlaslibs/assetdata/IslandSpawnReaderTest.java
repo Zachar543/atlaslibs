@@ -14,7 +14,7 @@ public class IslandSpawnReaderTest {
 	
 	@Test
 	public void readAll() throws Exception {
-		String path = "F:/_Games/steamapps/common/ATLAS/ShooterGame/Content/Maps/SeamlessTest";
+		String path = "F:/_Games/steamapps/common/ATLAS/ShooterGame/Content/";
 		File baseDir = new File(path);
 		
 		Map<String, IslandSpawnsDO> result = new IslandSpawnReader().readIslandSpawns(baseDir);

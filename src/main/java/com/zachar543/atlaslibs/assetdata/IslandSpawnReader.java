@@ -33,9 +33,9 @@ public class IslandSpawnReader {
 		IslandSpawnsDO result = new IslandSpawnsDO();
 		for (String subLevelName : island.getSublevelNames()) {
 			System.out.println("   - Processing subLevel \"" + subLevelName + "\"...");
-			File subLevelFolder = new File(baseDir, findSubLevelFolder(subLevelName));
+			File subLevelFolder = new File(baseDir, "Maps/SeamlessTest/" + findSubLevelFolder(subLevelName));
 			File subLevelFile = new File(subLevelFolder, subLevelName + ".umap");
-			result.addAllFrom(uMapReader.readMaterialsFromUMapFile(subLevelFile));
+			result.addAllFrom(uMapReader.readMaterialsFromUMapFile(baseDir, subLevelFile));
 		}
 		
 		return result;
